@@ -11,7 +11,6 @@ Pre-built image is hosted on Docker Hub (coming soon):
 Contains:
 
 - The ability to produce grasps on a scene using GIGA's pretrained models
-- GUI with docker is still a work in progress
 
 ## Requirements
 
@@ -86,6 +85,7 @@ docker run -it --rm --gpus all \
 Inside the container:
 
 ```bash
+pip install -e . #this is a work in progress to gettting inside the Dockerfile but for now run first inside container once
 python3 scripts/sim_grasp_multiple.py --num-view 1 --object-set pile/test --scene pile --num-rounds 100 --sideview --add-noise dex --force --best --model /GIGA/data/models/giga_pile.pt   --type giga   --result-path /results/ --sim-gui
 ```
 
