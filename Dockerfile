@@ -27,12 +27,8 @@ RUN conda config --set channel_priority flexible && \
 # Create conda env (giga)
 RUN conda create -y -n giga python=3.8 && conda clean -a -y
 
-
 # Clone repo
 RUN git clone https://github.com/UT-Austin-RPL/GIGA /GIGA
-
-# # Copy only the requirements file for pip install
-# COPY requirements.txt /tmp/requirements.txt
 
 # Install Python dependencies inside the conda env
 RUN export SKLEARN_ALLOW_DEPRECATED_SKLEARN_PACKAGE_INSTALL=True && \
@@ -57,15 +53,14 @@ RUN /opt/conda/envs/giga/bin/pip install --no-cache-dir --no-index \
 
 RUN /opt/conda/envs/giga/bin/pip install torchvision==0.8.1
 
-# RUN export CUDA_VISIBLE_DEVICES=""
 # PyTorch + CUDA 11.3 matching torchvision
 RUN /opt/conda/envs/giga/bin/pip install \
       torch==1.10.2+cu113 torchvision==0.11.3+cu113 \
       -f https://download.pytorch.org/whl/cu113/torch_stable.html
 
 
-# RUN pip3 install --no-cache-dir catkin_pkg
-# RUN pip3 install -e .
+RUN pip3 install --no-cache-dir catkin_pkg
+RUN /opt/conda/envs/giga/bin/pip install -e .
 
 # Default to bash
 CMD ["bash"]

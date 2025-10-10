@@ -5,13 +5,13 @@ This repository provides a setup for running the GIGA inference inside a Docker 
 Pre-built image is hosted on Docker Hub (coming soon):
 
 ```bash
-
+docker pull johnbrann/giga
 ```
 
 Contains:
 
 - The ability to produce grasps on a scene using GIGA's pretrained models
-
+- The ability to train a new GIGA model
 ## Requirements
 
 - Docker and/or Docker Compose installed on a Linux machine
@@ -33,7 +33,7 @@ git clone https://github.com/JohnBrann/giga_docker
 cd giga_docker
 ```
 
-### 3. Start the container (coming soon)
+### 3. Start the container
 
 ```bash
 docker-compose up -d
@@ -42,7 +42,7 @@ docker-compose up -d
 Then enter the container:
 
 ```bash
-docker exec -it giga_docker bash
+docker exec -it giga bash
 ```
 
 #### 3.1 (Optional alternative: no docker compose)
@@ -85,14 +85,14 @@ docker run -it --rm --gpus all \
 Inside the container:
 
 ```bash
-pip install -e . #this is a work in progress to gettting inside the Dockerfile but for now run first inside container once
 python3 scripts/sim_grasp_multiple.py --num-view 1 --object-set pile/test --scene pile --num-rounds 100 --sideview --add-noise dex --force --best --model /GIGA/data/models/giga_pile.pt   --type giga   --result-path /results/ --sim-gui
 ```
 
 This will perform simulated grasps in pybullet
 
 ## Download Models and Data
-  You will need to modify the mounted location of the model checkpoints in the run commands above. It does not matter the directory at which these files are located on your system, as long as they mounted into the docker workspace it should work. 
+  You will need to modify the mounted location of the model checkpoints in the run commands above. It does not matter the directory at which these files are located on your system, as long as they mounted into the docker workspace it should work. If you are using docker compose, put the data folder in giga_docker. You can also modify the mounted volume location in docker-compose.yml
+
 ### Model
 Download trained models from [here](https://utexas.app.box.com/s/h3ferwjhuzy6ja8bzcm3nu9xq1wkn94s)
 
